@@ -22,9 +22,6 @@ function Product(name, src) {
 
 Product.allProducts = [];
 
-new Product("camera", "images/camera.jpg");
-new Product("mug", "images/mugshot.jpg");
-
 //using this array create a new product for each item
 // the name of the product should be the item in the array
 // the src of the product should be like so:
@@ -66,3 +63,27 @@ function randomProductIndex() {
 //write a function to render our images
 //have the images be chosen randomly from our Product.allproducts array
 // use randomProductIndex() and bracket notation to access the item in the array
+
+function renderImages() {
+  //get three random indexes for my product array
+  let index1 = randomProductIndex();
+  let index2 = randomProductIndex();
+  let index3 = randomProductIndex();
+
+  //make sure none of them are the same
+  while (index1 === 2 || index1 === index3 || index2 === index3) {
+    index2 = randomProductIndex();
+    index3 = randomProductIndex();
+  }
+
+  //retrieve our image elements
+  let img1 = document.getElementById("img1");
+  let img2 = document.getElementById("img2");
+  let img3 = document.getElementById("img3");
+
+  // change the src attribute of img1, img2 & img3 to be the src from out random products
+  img1.src = Product.allProducts[index1].src;
+  img2.src = Product.allProducts[index2].src;
+  img3.src = Product.allProducts[index3].src;
+}
+renderImages();
