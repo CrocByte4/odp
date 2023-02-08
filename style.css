@@ -38,7 +38,7 @@ header {
 
 #main-container {
   grid-area: 2 / 2 / 3 / 3;
-  background-color: fuchsia;
+  background-color: yellow;
   color: black;
   display: flex;
   flex-direction: column;
