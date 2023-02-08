@@ -49,3 +49,13 @@ footer {
   grid-area: 3 / 1 / 4 / 3;
   background-color: aquamarine;
 }
+
+/* main styles */
+#img-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+#img-container img {
+  max-width: 30%;
+}
