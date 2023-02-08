@@ -59,6 +59,10 @@ for (let i = 0; i < productNames.length; i++) {
 //the number will represent an index value for one of the items in the Product.allProducts array
 // use google to help but not own previous work
 
-function randomIndex() {
+function randomProductIndex() {
   return Math.floor(Math.random() * Product.allProducts.length);
 }
+
+//write a function to render our images
+//have the images be chosen randomly from our Product.allproducts array
+// use randomProductIndex() and bracket notation to access the item in the array
