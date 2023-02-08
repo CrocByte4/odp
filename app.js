@@ -54,3 +54,11 @@ const productNames = [
 for (let i = 0; i < productNames.length; i++) {
   new Product(productNames[i], `images/${productNames[i]}.jpeg`);
 }
+
+//write a function that returns a random number
+//the number will represent an index value for one of the items in the Product.allProducts array
+// use google to help but not own previous work
+
+function randomIndex() {
+  return Math.floor(Math.random() * Product.allProducts.length);
+}
