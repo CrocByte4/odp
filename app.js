@@ -81,9 +81,35 @@ function renderImages() {
   let img2 = document.getElementById("img2");
   let img3 = document.getElementById("img3");
 
-  // change the src attribute of img1, img2 & img3 to be the src from out random products
+  // change the src attribute of img1, img2 & img3 to be the src from our random products
   img1.src = Product.allProducts[index1].src;
   img2.src = Product.allProducts[index2].src;
   img3.src = Product.allProducts[index3].src;
+
+  img1.alt = Product.allProducts[index1].name;
+  img2.alt = Product.allProducts[index2].name;
+  img3.alt = Product.allProducts[index3].name;
 }
+
+function handleClick(event) {
+  //increase the clicks on the clicked product object (for looop and click ++(check the alt of the event.target.all)
+  // make sure the user is clicking on one of the images
+  if (event.target === imgContainer) {
+    alert("wrong spot, please click ON one of the images");
+    return; //this return stops the function
+  }
+  //check every single products "name" against the alt of the target and increase the clicks
+  for (let i = 0; i < Product.allProducts.length; i++) {
+    console.log(Product.allProducts[i]);
+    if (event.target.alt === Product.allProducts[i].name) {
+      Product.allProducts[i].clicks++;
+      break; //stop the loop because we found the product
+    }
+  }
+  renderImages();
+}
+
+const imgContainer = document.getElementById("img-container");
+imgContainer.addEventListener("click", handleClick);
+
 renderImages();
