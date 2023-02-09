@@ -89,6 +89,11 @@ function renderImages() {
   img1.alt = Product.allProducts[index1].name;
   img2.alt = Product.allProducts[index2].name;
   img3.alt = Product.allProducts[index3].name;
+
+  // increase the views for the three products
+  Product.allProducts[index1].views++;
+  Product.allProducts[index2].views++;
+  Product.allProducts[index3].views++;
 }
 
 function handleClick(event) {
