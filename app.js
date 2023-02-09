@@ -122,6 +122,7 @@ function handleClick(event) {
   if (totalClicks === maxClicks) {
     alert("Thank you for taking part, you have now completed the survey.");
     imgContainer.removeEventListener("click", handleClick);
+    renderChart();
     return; //end the function
   }
 
@@ -138,14 +139,28 @@ imgContainer.addEventListener("click", handleClick);
 // use a canvas tag with an id
 // use a demo chart from the chartJS docs
 function renderChart() {
-  const theChart = document.getElementById("chart");
+  const myChart = document.getElementById("chart");
+  let labels = [];
+  let viewsData = [];
+  let clicksData = [];
+
+  for (let i = 0; i < Product.allProducts.length; i++) {
+    labels.push(Product.allProducts[i].name);
+    viewsData.push(Product.allProducts[i].views);
+    clicksData.push(Product.allProducts[i].clicks);
+  }
 
   const data = {
-    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+    labels: labels,
     datasets: [
       {
+        label: "# of Views",
+        data: viewsData,
+        borderWidth: 1,
+      },
+      {
         label: "# of Votes",
-        data: [12, 19, 3, 5, 2, 3],
+        data: clicksData,
         borderWidth: 1,
       },
     ],
@@ -153,15 +168,8 @@ function renderChart() {
   const config = {
     type: "bar",
     data: data,
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true,
-        },
-      },
-    },
   };
-  new Chart(theChart, config);
+  new Chart(myChart, config);
 }
 
 //render the initial images
