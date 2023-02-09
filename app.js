@@ -1,3 +1,6 @@
+let totalClicks = 0;
+let maxClicks = 5;
+
 //write a constructor function that accepts two parameters
 //name
 //Source
@@ -71,7 +74,7 @@ function renderImages() {
   let index3 = randomProductIndex();
 
   //make sure none of them are the same
-  while (index1 === 2 || index1 === index3 || index2 === index3) {
+  while (index1 === index2 || index1 === index3 || index2 === index3) {
     index2 = randomProductIndex();
     index3 = randomProductIndex();
   }
@@ -111,10 +114,55 @@ function handleClick(event) {
       break; //stop the loop because we found the product
     }
   }
+  // each time we click we need to increase clicks,
+  // we need to check weve reached maximum clicks allowed
+  //if we have, dont render more images, and remove the eventlistener on the image container
+  //if we havent, render more images
+  totalClicks++;
+  if (totalClicks === maxClicks) {
+    alert("Thank you for taking part, you have now completed the survey.");
+    imgContainer.removeEventListener("click", handleClick);
+    return; //end the function
+  }
+
+  //get three images
   renderImages();
 }
 
 const imgContainer = document.getElementById("img-container");
 imgContainer.addEventListener("click", handleClick);
 
+//render a chart
+// using chartJS
+//have a chart display in the section underneath the img-container
+// use a canvas tag with an id
+// use a demo chart from the chartJS docs
+function renderChart() {
+  const theChart = document.getElementById("chart");
+
+  const data = {
+    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+    datasets: [
+      {
+        label: "# of Votes",
+        data: [12, 19, 3, 5, 2, 3],
+        borderWidth: 1,
+      },
+    ],
+  };
+  const config = {
+    type: "bar",
+    data: data,
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+  };
+  new Chart(theChart, config);
+}
+
+//render the initial images
 renderImages();
