@@ -15,11 +15,11 @@ let maxClicks = 5;
 
 //call the constructor Product
 
-function Product(name, src) {
+function Product(name, src, clicks, views) {
   this.name = name;
   this.src = src;
-  this.clicks = 0;
-  this.views = 0;
+  this.clicks = clicks;
+  this.views = views;
   Product.allProducts.push(this);
 }
 
@@ -51,8 +51,21 @@ const productNames = [
   "wine-glass",
 ];
 
-for (let i = 0; i < productNames.length; i++) {
-  new Product(productNames[i], `images/${productNames[i]}.jpeg`);
+if (localStorage.getItem("productData") === null) {
+  for (let i = 0; i < productNames.length; i++) {
+    new Product(productNames[i], `images/${productNames[i]}.jpeg`, 0, 0);
+  }
+} else {
+  const productData = JSON.parse(localStorage.getItem("productData"));
+
+  for (let i = 0; i < productData.length; i++) {
+    new Product(
+      productData[i].name,
+      productData[i].src,
+      productData[i].clicks,
+      productData[i].views
+    );
+  }
 }
 
 //write a function that returns a random number
@@ -122,6 +135,10 @@ function handleClick(event) {
   if (totalClicks === maxClicks) {
     alert("Thank you for taking part, you have now completed the survey.");
     imgContainer.removeEventListener("click", handleClick);
+
+    const productsStr = JSON.stringify(Product.allProducts);
+    localStorage.setItem("productData", productsStr);
+
     renderChart();
     return; //end the function
   }
